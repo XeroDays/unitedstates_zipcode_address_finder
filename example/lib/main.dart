@@ -1,54 +1,94 @@
-import 'package:flutter/material.dart';
-import 'dart:async';
- 
+import 'package:flutter/material.dart'; 
+import 'package:usa_zipcode_address/usa_zipcode_address.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
-  
-
-  @override
-  void initState() {
-    super.initState();
-    initPlatformState();
-  }
-
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-     
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    // We also handle the message potentially returning null.
-    
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-
-    setState(() { 
-    });
-  }
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
-        ),
+      title: 'United States Zip Code Address Example',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const Home(),
+    );
+  }
+}
+
+class Home extends StatefulWidget {
+  const Home();
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  String rates = "";
+  bool isLoading = false;
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
+    return Scaffold(
+      appBar: AppBar(title: const Text("United States ZipCode Address")),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+              width: size.width,
+              child: const Text(
+                "USD to AED",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 22),
+              )),
+          SizedBox(
+              width: size.width,
+              child: const Text(
+                "US Doller to UAE Dirhem",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 10),
+              )),
+          const SizedBox(height: 20),
+          isLoading
+              ? const CircularProgressIndicator()
+              : Column(
+                  children: [
+                    const Text(
+                      "Real-Time Current Rate",
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      rates,
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.normal),
+                    ),
+                  ],
+                ),
+          const SizedBox(height: 20),
+          ElevatedButton(
+              onPressed: () async {
+                setState(() {
+                  isLoading = true;
+                });
+                CurrencyRate rate =
+                    await USAZipCodeAddressFinder.convertCurrency("USD", "AED", 1);
+
+                setState(() {
+                  print(rate.message);
+                  rates = "1 USD  =  ${rate.result} AED";
+                  isLoading = false;
+                });
+              },
+              child: Text("Click to get Rates")),
+        ],
       ),
     );
   }

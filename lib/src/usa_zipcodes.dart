@@ -16,7 +16,7 @@ class MyHttpOverrides extends HttpOverrides {
 }
 
 
-class USAZipCodesMain {
+class USAZipCodeAddressFinder {
   static const String _baseUrl = 'https://api.softasium.com/Currency';
 
   static bool _healthCheck = false;

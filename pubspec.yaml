@@ -1,5 +1,5 @@
-name: usa_zipcode_address
-description: "Flutter Plugin which retreive latest USA Zipcode Address from address server"
+name: usa_zipcode_address_finder
+description: "Flutter Plugin which retreive latest USA Addresses with Zipcode"
 version: 1.0.0
 homepage: 
 
