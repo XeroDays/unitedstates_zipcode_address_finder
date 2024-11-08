@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -31,7 +29,6 @@ class USAZipCodeAddressFinder {
     };
 
     try {
-      print(uri.toString());
       //if timeout is not null then add timeout else without timeout post request
       http.Response response = timeOutSeconds != null
           ? await http
@@ -79,7 +76,6 @@ class USAZipCodeAddressFinder {
             areaCode: "");
       }
     } catch (e) {
-      print("Error : $e");
       return ZipCodeLocation(
           message:
               "Error  :  Failed hitting api, Unable to connect to the server. or Server not available/active. Please Try again later!",
