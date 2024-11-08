@@ -5,7 +5,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 
-
 class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
@@ -15,38 +14,24 @@ class MyHttpOverrides extends HttpOverrides {
   }
 }
 
-
 class USAZipCodeAddressFinder {
-  static const String _baseUrl = 'https://api.softasium.com/Currency';
+  static const String _baseUrl = 'https://api.softasium.com/api/ZipApi?hash=';
 
-  static bool _healthCheck = false;
-
-  /// Convert Currency
-  /// currentCurrency: Currency Code you want to transfer from : USD
-  /// toCurrency: Currency Code you want to transfer to : CAD
-  /// price: Amount of currency you want to calucalte Forexample : 1
-  static Future<CurrencyRate> convertCurrency(
-    
-      String currentCurrency, String toCurrency, double price,
+  /// Search ZipCode on United states and get the location details of the zipcode
+  /// [zipCode] is the zipcode of the location
+  /// [timeOutSeconds] is the time out for the request
+  /// return [ZipCodeLocation] object
+  static Future<ZipCodeLocation> searchZipcode(String zipCode,
       {int? timeOutSeconds}) async {
-        HttpOverrides.global = MyHttpOverrides();
-    final uri = Uri.parse('$_baseUrl/$currentCurrency/$toCurrency/$price');
+    HttpOverrides.global = MyHttpOverrides();
+    final uri = Uri.parse('$_baseUrl$zipCode');
     final headers = {
       "Authorization": "iamsyedidrees",
       "Accept": "*/*",
     };
 
     try {
-      if (!_healthCheck) {
-        http.Response statusHealthResponse = await http.post(
-          Uri.parse('$_baseUrl/health'),
-          headers: headers,
-        );
-        if (statusHealthResponse.statusCode == 200) {
-          _healthCheck = true;
-        }
-      }
-
+      print(uri.toString());
       //if timeout is not null then add timeout else without timeout post request
       http.Response response = timeOutSeconds != null
           ? await http
@@ -69,42 +54,79 @@ class USAZipCodeAddressFinder {
       String responseBody = response.body;
       if (statusCode == 200) {
         Map<String, dynamic> data = jsonDecode(responseBody.toString());
-        return CurrencyRate.fromSnapshot(data);
+        return ZipCodeLocation.fromSnapshot(data);
       } else if (statusCode == 300) {
-        return CurrencyRate(
+        return ZipCodeLocation(
             message: "No Internet connected, or Weak Internet : $statusCode",
             status: false,
-            result: 0);
+            zipCode: zipCode,
+            stateCode: "",
+            stateName: "",
+            city: "",
+            localName: "",
+            address: "",
+            areaCode: "");
       } else {
-        return CurrencyRate(
+        return ZipCodeLocation(
             message: "Not Authorized. Return with Reponse code : $statusCode",
             status: false,
-            result: 0);
+            zipCode: zipCode,
+            stateCode: "",
+            stateName: "",
+            city: "",
+            localName: "",
+            address: "",
+            areaCode: "");
       }
     } catch (e) {
-      print("Error : $e"); 
-      return CurrencyRate(
+      print("Error : $e");
+      return ZipCodeLocation(
           message:
               "Error  :  Failed hitting api, Unable to connect to the server. or Server not available/active. Please Try again later!",
           status: false,
-          result: 0);
+          zipCode: zipCode,
+          stateCode: "",
+          stateName: "",
+          city: "",
+          localName: "",
+          address: "",
+          areaCode: "");
     }
   }
 }
 
-class CurrencyRate {
-  late String message;
-  late bool status;
-  late double result;
-  CurrencyRate({
-    required this.message,
-    required this.status,
-    required this.result,
+class ZipCodeLocation {
+  late String zipCode;
+  late String stateCode;
+  late String stateName;
+  late String city;
+  late String localName;
+  late String address;
+  late String areaCode;
+  String? message;
+  bool? status;
+
+  ZipCodeLocation({
+    required this.zipCode,
+    required this.stateCode,
+    required this.stateName,
+    required this.city,
+    required this.localName,
+    required this.address,
+    required this.areaCode,
+    this.message,
+    this.status,
   });
 
-  CurrencyRate.fromSnapshot(Map<String, dynamic> map) {
-    message = map["message"];
-    status = map["status"];
-    result = map["result"];
+  ZipCodeLocation.fromSnapshot(Map<String, dynamic> map) {
+    zipCode = map['zip_code'];
+    stateCode = map['state_code'];
+    stateName = map['state_name'];
+    city = map['city'];
+    localName = map['local_name'];
+    address = map['address'];
+    areaCode = map['area_code'];
+    message = map['message'];
+    status = map['status'];
   }
 }

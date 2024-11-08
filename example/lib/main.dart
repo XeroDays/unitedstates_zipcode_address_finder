@@ -1,12 +1,13 @@
-import 'package:flutter/material.dart'; 
-import 'package:usa_zipcode_address/usa_zipcode_address.dart';
+import 'dart:math';
+import 'package:flutter/material.dart';
+import 'package:usa_zipcode_address_finder/usa_zipcode_address.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      themeMode: ThemeMode.system,
       home: const Home(),
     );
   }
@@ -28,7 +30,20 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  String rates = "";
+  //list of tempororray zipcodes
+  List<String> zipcodes = [
+    "66541",
+    "54433",
+    "66542",
+    "55421",
+    "66543",
+    "72122",
+    "55424",
+    "62345",
+  ];
+
+  String randomZipCode = "";
+  String zipcodeInformation = "[No Information (Click to refresh)]";
   bool isLoading = false;
   @override
   Widget build(BuildContext context) {
@@ -43,14 +58,14 @@ class _HomeState extends State<Home> {
           SizedBox(
               width: size.width,
               child: const Text(
-                "USD to AED",
+                "Search for any US Zipcode",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 22),
               )),
           SizedBox(
               width: size.width,
               child: const Text(
-                "US Doller to UAE Dirhem",
+                "UnitedStates ZipCode Address Finder",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 10),
               )),
@@ -59,14 +74,20 @@ class _HomeState extends State<Home> {
               ? const CircularProgressIndicator()
               : Column(
                   children: [
+                    const SizedBox(height: 3),
+                    Text(
+                      randomZipCode.toString(),
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
                     const Text(
-                      "Real-Time Current Rate",
+                      "Zipcode Information",
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      rates,
+                      zipcodeInformation,
                       style: const TextStyle(
                           fontSize: 18, fontWeight: FontWeight.normal),
                     ),
@@ -78,18 +99,41 @@ class _HomeState extends State<Home> {
                 setState(() {
                   isLoading = true;
                 });
-                CurrencyRate rate =
-                    await USAZipCodeAddressFinder.convertCurrency("USD", "AED", 1);
 
-                setState(() {
-                  print(rate.message);
-                  rates = "1 USD  =  ${rate.result} AED";
-                  isLoading = false;
-                });
+                //select random zipcode from the list
+                Random random = Random();
+                randomZipCode = zipcodes[random.nextInt(zipcodes.length)];
+
+                ZipCodeLocation objec =
+                    await USAZipCodeAddressFinder.searchZipcode(randomZipCode);
+                updateScreen(objec);
               },
-              child: Text("Click to get Rates")),
+              //set font size to be 20
+              style: ButtonStyle(
+                foregroundColor:
+                    WidgetStateProperty.all(Color.fromARGB(255, 12, 115, 199)),
+                padding: WidgetStateProperty.all(const EdgeInsets.all(13)),
+                textStyle: WidgetStateProperty.all(
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              ),
+              child: const Text("Search Zipcode Address")),
         ],
       ),
     );
+  }
+
+  void updateScreen(ZipCodeLocation objec) {
+    setState(() {
+      zipcodeInformation = "";
+      zipcodeInformation += "ZipCode : ${objec.zipCode}\n";
+      zipcodeInformation += "City : ${objec.city}\n";
+      zipcodeInformation += "State Code : ${objec.stateCode}\n";
+      zipcodeInformation += "State Name : ${objec.stateName}\n";
+      zipcodeInformation += "Local Name : ${objec.localName}\n";
+      zipcodeInformation += "Address : ${objec.address}\n";
+      zipcodeInformation += "Area Code : ${objec.areaCode}\n";
+
+      isLoading = false;
+    });
   }
 }
