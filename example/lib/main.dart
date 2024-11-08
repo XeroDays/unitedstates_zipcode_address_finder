@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:usa_zipcode_address_finder/usa_zipcode_address.dart';
+import 'package:usa_zipcode_address_lookup/usa_zipcode_address_lookup.dart';
 
 void main() {
   runApp(const MyApp());
@@ -105,7 +105,7 @@ class _HomeState extends State<Home> {
                 randomZipCode = zipcodes[random.nextInt(zipcodes.length)];
 
                 ZipCodeLocation objec =
-                    await USAZipCodeAddressFinder.searchZipcode(randomZipCode);
+                    await USAZipCodeAddressLookup.searchZipcode(randomZipCode);
                 updateScreen(objec);
               },
               //set font size to be 20

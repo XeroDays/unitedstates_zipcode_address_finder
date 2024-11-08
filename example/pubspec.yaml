@@ -9,7 +9,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  usa_zipcode_address_finder:
+  usa_zipcode_address_lookup:
     path: ../
 
   cupertino_icons: ^1.0.6

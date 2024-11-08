@@ -12,7 +12,7 @@ class MyHttpOverrides extends HttpOverrides {
   }
 }
 
-class USAZipCodeAddressFinder {
+class USAZipCodeAddressLookup {
   static const String _baseUrl = 'https://api.softasium.com/api/ZipApi?hash=';
 
   /// Search ZipCode on United states and get the location details of the zipcode
