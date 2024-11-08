@@ -21,14 +21,13 @@ This package is ideal for applications requiring accurate location information s
   - **Area code**
   - **State code**
 
-## Supported Devices
+## Supported Devices 
 
-- **Android**: ✅
-- **iOS**: ✅
-- **Web**: ❌
-- **MacOS**:  `(To be tested)`
-- **Windows**:  `(To be tested)`
-- **Linux**:  `(To be tested)`
+| Android | iOS | MacOS | Windows | Linux | Web |
+| ------- | --- | ----- | ------- | ----- | --- |
+|    ✅   |  ✅  |   `(To be tested)`  |   `(To be tested)`    |   `(To be tested)`   |  ❌ |
+
+
 
 ## Installation
 
