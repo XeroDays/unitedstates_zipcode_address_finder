@@ -1,18 +1,84 @@
-# usa_zipcode_address
+Here’s an updated `README.md` including a "Supported Devices" section.
 
-A new Flutter plugin project.
+---
 
-## Getting Started
+# United States Zip Code Lookup
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+A Flutter package to retrieve detailed location information based on United States zip codes. This package sends a request to a cloud server to fetch the address, state name, city name, local name, area code, and state code associated with a given zip code.
 
-For help getting started with Flutter development, view the
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+This package is ideal for applications requiring accurate location information specific to U.S. zip codes.
 
-The plugin project was generated without specifying the `--platforms` flag, no platforms are currently supported.
-To add platforms, run `flutter create -t plugin --platforms <platforms> .` in this directory.
-You can also find a detailed instruction on how to add platforms in the `pubspec.yaml` at https://flutter.dev/docs/development/packages-and-plugins/developing-packages#plugin-platforms.
+## Features
+
+- Fetches location details based on U.S. zip codes
+- Returns:
+  - **Address**
+  - **State name**
+  - **City name**
+  - **Local name**
+  - **Area code**
+  - **State code**
+
+## Supported Devices
+
+- **Android**: Compatible with Android devices running Android 5.0 (Lollipop) and above.
+- **iOS**: Compatible with iOS devices running iOS 10.0 and above.
+
+## Installation
+
+Add this package to your project's `pubspec.yaml` file:
+
+```yaml
+dependencies:
+  usa_zipcode_address_finder: ^1.0.0
+```
+
+Then, run:
+
+```sh
+flutter pub get
+```
+
+## Usage
+
+### Import the Package
+
+```dart
+import 'package:usa_zipcode_address_finder/usa_zipcode_address.dart';
+```
+
+### Example
+
+To retrieve location details, Create a static instance of  `USAZipCodeAddressFinder` class (or similar) and call the `searchZipcode` method with the zip code as an argument. 
+
+Here’s an example:
+
+```dart
+ZipCodeLocation locationModel = await USAZipCodeAddressFinder.searchZipcode(randomZipCode);
+```
+
+### Sample Output
+
+Given a zip code, the output would include information like:
+
+```plaintext
+Address: 320 MAIN ST
+State Name: Kansas
+City Name: SUMMERFIELD
+Local Name: SUMMERFIELD
+Area Code: 4J
+State Code: KS
+```
+
+
+## License
+
+[MIT License](LICENSE)
+
+## Contributions
+
+Contributions are welcome! Feel free to submit a pull request or report issues.
+
+--- 
+
+This README provides a thorough overview, covering the main features, supported devices, installation, usage, and contribution guidelines.
