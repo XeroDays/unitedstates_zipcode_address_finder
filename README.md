@@ -1,7 +1,3 @@
-Here’s an updated `README.md` including a "Supported Devices" section.
-
----
-
 # United States Zip Code Lookup
 
 A Flutter package to retrieve detailed location information based on United States zip codes. This package sends a request to a cloud server to fetch the address, state name, city name, local name, area code, and state code associated with a given zip code.
@@ -21,8 +17,12 @@ This package is ideal for applications requiring accurate location information s
 
 ## Supported Devices
 
-- **Android**: Compatible with Android devices running Android 5.0 (Lollipop) and above.
-- **iOS**: Compatible with iOS devices running iOS 10.0 and above.
+- **Android**: ✅
+- **iOS**: ✅
+- **Web**: ❌
+- **MacOS**:  `(To be tested)`
+- **Windows**:  `(To be tested)`
+- **Linux**:  `(To be tested)`
 
 ## Installation
 
@@ -78,7 +78,3 @@ State Code: KS
 ## Contributions
 
 Contributions are welcome! Feel free to submit a pull request or report issues.
-
---- 
-
-This README provides a thorough overview, covering the main features, supported devices, installation, usage, and contribution guidelines.
