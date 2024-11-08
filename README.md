@@ -35,7 +35,7 @@ Add this package to your project's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  usa_zipcode_address_finder: ^1.0.0
+  usa_zipcode_address_lookup: ^1.0.0
 ```
 
 Then, run:
@@ -49,17 +49,17 @@ flutter pub get
 ### Import the Package
 
 ```dart
-import 'package:usa_zipcode_address_finder/usa_zipcode_address.dart';
+import 'package:usa_zipcode_address_lookup/usa_zipcode_address_lookup.dart';
 ```
 
 ### Example
 
-To retrieve location details, Create a static instance of  `USAZipCodeAddressFinder` class (or similar) and call the `searchZipcode` method with the zip code as an argument. 
+To retrieve location details, Create a static instance of  `USAZipCodeAddressLookup` class (or similar) and call the `searchZipcode` method with the zip code as an argument. 
 
 Here’s an example:
 
 ```dart
-ZipCodeLocation locationModel = await USAZipCodeAddressFinder.searchZipcode(randomZipCode);
+ZipCodeLocation locationModel = await USAZipCodeAddressLookup.searchZipcode(randomZipCode);
 ```
 
 ### Sample Output
