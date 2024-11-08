@@ -3,11 +3,12 @@
 A Flutter package to retrieve detailed location information based on United States zip codes. This package sends a request to a cloud server to fetch the address, state name, city name, local name, area code, and state code associated with a given zip code.
 
 This package is ideal for applications requiring accurate location information specific to U.S. zip codes.
+ 
+## Gallery
 
-## Image
-
-<img width="298" alt="image" src="https://github.com/user-attachments/assets/32225425-0f9c-4520-b21e-9f4e8b995d39">
-
+<div style="display:flex">
+<code><img height="400px" src="https://github-production-user-asset-6210df.s3.amazonaws.com/38852291/384482117-32225425-0f9c-4520-b21e-9f4e8b995d39.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20241108%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20241108T182603Z&X-Amz-Expires=300&X-Amz-Signature=87e280e4e033be8b008f1cbccb5a7e8deff1488961afa042b203dcb083f9d192&X-Amz-SignedHeaders=host"></code> 
+</div>
 
 ## Features
 
