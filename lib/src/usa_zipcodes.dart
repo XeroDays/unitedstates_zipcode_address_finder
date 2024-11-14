@@ -49,6 +49,7 @@ class USAZipCodeAddressLookup {
 
       int statusCode = response.statusCode;
       String responseBody = response.body;
+      print(responseBody);
       if (statusCode == 200) {
         Map<String, dynamic> data = jsonDecode(responseBody.toString());
         return ZipCodeLocation.fromSnapshot(data);
@@ -116,12 +117,12 @@ class ZipCodeLocation {
 
   ZipCodeLocation.fromSnapshot(Map<String, dynamic> map) {
     zipCode = map['zip_code'];
-    stateCode = map['state_code'];
-    stateName = map['state_name'];
-    city = map['city'];
-    localName = map['local_name'];
-    address = map['address'];
-    areaCode = map['area_code'];
+    stateCode = map['state_abbr']??"";
+    stateName = map['state_name']??"";
+    city = map['city']??"";
+    localName = map['local_name']??"";
+    address = map['address']??"";
+    areaCode = map['area_code']??"";
     message = map['message'];
     status = map['status'];
   }

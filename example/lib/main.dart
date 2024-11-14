@@ -34,12 +34,11 @@ class _HomeState extends State<Home> {
   List<String> zipcodes = [
     "66541",
     "54433",
-    "66542",
-    "55421",
+    "00601" ,
     "66543",
     "72122",
     "55424",
-    "62345",
+    "62345"
   ];
 
   String randomZipCode = "";
