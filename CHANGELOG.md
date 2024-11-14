@@ -1,3 +1,8 @@
+## 1.0.1    
+ - Bug fixes on zip code retreival
+ - null check added
+
+
 ## 1.0.0
 
 - Initial Release

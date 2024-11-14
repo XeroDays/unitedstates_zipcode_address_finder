@@ -1,6 +1,6 @@
 name: usa_zipcode_address_lookup
 description: "Flutter plugin to retrieve detailed location information for U.S. zip codes, including address, state, city, local name, area code, and state code. Supports Android and iOS devices"
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/XeroDays/unitedstates_zipcode_address_finder
 
 environment:
